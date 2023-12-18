@@ -67,7 +67,15 @@ export default async function Navbar() {
                   Dashboard
                 </Link>
 
-                <UserAccNav email={undefined} imageUrl={""} name={""} />
+                <UserAccNav
+                  email={user.email ?? ""}
+                  imageUrl={user.picture ?? ""}
+                  name={
+                    !user.given_name || !user.family_name
+                      ? "Your Account"
+                      : `${user.given_name} ${user.family_name}`
+                  }
+                />
               </>
             )}
           </div>
