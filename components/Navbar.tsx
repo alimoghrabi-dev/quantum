@@ -28,11 +28,9 @@ export default async function Navbar() {
             Quantum.
           </Link>
 
-          <MovieNav isAuth={!!user} />
-
-          <div className="hidden items-center space-x-4 sm:flex">
+          <div className="flex items-center space-x-4">
             {!user ? (
-              <>
+              <div className="hidden sm:flex">
                 <Link
                   href="/pricing"
                   className={buttonVariants({
@@ -56,18 +54,9 @@ export default async function Navbar() {
                   Get Started
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </RegisterLink>
-              </>
+              </div>
             ) : (
               <>
-                <Link
-                  href="/dashboard"
-                  className={buttonVariants({
-                    variant: "ghost",
-                    size: "sm",
-                  })}>
-                  Dashboard
-                </Link>
-
                 <UserAccNav
                   email={user.email ?? ""}
                   imageUrl={user.picture ?? ""}
@@ -77,8 +66,18 @@ export default async function Navbar() {
                       : `${user.given_name} ${user.family_name}`
                   }
                 />
+                <Link
+                  href="/dashboard"
+                  className={buttonVariants({
+                    size: "sm",
+                    className: "sm:flex items-center hidden",
+                  })}>
+                  Dashboard
+                </Link>
               </>
             )}
+
+            {!user ? <MovieNav isAuth={!!user} /> : null}
           </div>
         </div>
       </MaxWidthRapper>

@@ -6,13 +6,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import Image from "next/image";
 import { Icons } from "./Icons";
 import Link from "next/link";
 import { Gem, LogOut } from "lucide-react";
 import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/server";
+import { cn } from "@/lib/utils";
 
 interface UserAccNavProps {
   email: string | undefined;
@@ -26,7 +27,9 @@ const UserAccNav = async ({ email, imageUrl, name }: UserAccNavProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="overflow-visible">
-        <Button className="rounded-full h-8 w-8 aspect-square bg-slate-400">
+        <Button
+          variant={"ghost"}
+          className="rounded-full h-8 w-8 aspect-square ring-1 ring-primary/90">
           <Avatar className="relative w-8 h-8">
             {imageUrl ? (
               <div className="relative aspect-square h-full w-full">
@@ -49,7 +52,16 @@ const UserAccNav = async ({ email, imageUrl, name }: UserAccNavProps) => {
       <DropdownMenuContent className="bg-white" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-0.5 leading-none">
-            {name && <p className="font-medium text-sm text-black">{name}</p>}
+            {name && (
+              <p className="font-medium text-sm text-black flex justify-between">
+                {name}
+                {subscriptionPlan.isSubscribed && (
+                  <span className="bg-primary py-0.5 px-2 text-gray-50 text-xs rounded-full">
+                    Pro
+                  </span>
+                )}
+              </p>
+            )}
             {email && (
               <p className="font-medium text-zinc-700 w-[200px] truncate text-xs">
                 {email}

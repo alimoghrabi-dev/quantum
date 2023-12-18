@@ -24,12 +24,12 @@ export default function Home() {
         <Link
           className={buttonVariants({
             size: "lg",
-            className: "mt-5 text-[1.01rem] font-semibold",
+            className: "mt-5 text-[1.01rem] font-semibold flex items-center",
           })}
           href="/dashboard"
           target="_blank">
           Get Started
-          <ArrowRight className="ml-2 h-5 w-5" />
+          <ArrowRight className="ml-2 h-[18px] w-[18px] mt-0.5" />
         </Link>
       </MaxWidthRapper>
 

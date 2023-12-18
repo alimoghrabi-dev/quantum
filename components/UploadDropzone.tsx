@@ -7,7 +7,7 @@ import { useToast } from "./ui/use-toast";
 import { trpc } from "@/app/_trpc/client";
 import { useRouter } from "next/navigation";
 
-const UploadDropzone = () => {
+const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const router = useRouter();
 
   const [isUploading, setIsUploading] = useState<boolean>(false);
@@ -15,10 +15,12 @@ const UploadDropzone = () => {
 
   const { toast } = useToast();
 
-  const { startUpload } = useUploadThing("pdfUploader");
+  const { startUpload } = useUploadThing(
+    isSubscribed ? "proPlanUploader" : "freePlanUploader"
+  );
 
   const { mutate: startPolling } = trpc.getFile.useMutation({
-    onSuccess: (file) => {
+    onSuccess: (file: { id: any }) => {
       router.push(`/dashboard/${file.id}`);
     },
     retry: true,
@@ -77,6 +79,12 @@ const UploadDropzone = () => {
         setUploadProgess(100);
 
         startPolling({ key });
+
+        toast({
+          title: "File Uploaded",
+          description: "Your file has been uploaded successfully.",
+          variant: "default",
+        });
       }}>
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
@@ -92,7 +100,9 @@ const UploadDropzone = () => {
                   <span className="font-semibold">Click to upload</span> or drag
                   and drop
                 </p>
-                <p className="text-xs text-zinc-500">PDF (max. 4MB)</p>
+                <p className="text-xs text-zinc-500">
+                  PDF (max. {isSubscribed ? 32 : 4}MB)
+                </p>
               </div>
 
               {acceptedFiles.length && acceptedFiles[0] ? (

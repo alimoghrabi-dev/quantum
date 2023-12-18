@@ -16,12 +16,12 @@ export const plans = [
     name: "Pro",
     slug: "pro",
     quota: 50,
-    pagesPerPDF: 25,
+    pagesPerPDF: 50,
     price: {
       amount: 10,
       priceIds: {
         test: "price_1OObEDGBpH0UJC6N0fIJUmQJ",
-        production: "",
+        production: "https://quantum-seven.vercel.app",
       },
     },
   },
