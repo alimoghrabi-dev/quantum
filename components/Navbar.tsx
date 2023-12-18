@@ -10,6 +10,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 import UserAccNav from "./UserAccNav";
+import MovieNav from "./MovieNav";
 
 export default async function Navbar() {
   const { getUser } = getKindeServerSession();
@@ -17,7 +18,7 @@ export default async function Navbar() {
   const user = await getUser();
 
   return (
-    <nav className="sticky h-14 inset-x-0 top-0 z-50 w-full border-b border-gray-200 bg-white/70 backdrop-blur-lg transition-all">
+    <nav className="sticky h-14 inset-x-0 px-4 top-0 z-50 w-full border-b border-gray-200 bg-white/70 backdrop-blur-lg transition-all">
       <MaxWidthRapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link
@@ -27,7 +28,7 @@ export default async function Navbar() {
             Quantum.
           </Link>
 
-          {/** TODO: Add Mobile Nav */}
+          <MovieNav isAuth={!!user} />
 
           <div className="hidden items-center space-x-4 sm:flex">
             {!user ? (

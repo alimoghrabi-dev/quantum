@@ -10,13 +10,7 @@ import {
 import { cn } from "@/lib/utils";
 import { plans } from "@/stripe";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import {
-  ArrowRight,
-  ArrowRightIcon,
-  Check,
-  HelpCircle,
-  MinusIcon,
-} from "lucide-react";
+import { ArrowRightIcon, Check, HelpCircle, MinusIcon } from "lucide-react";
 import Link from "next/link";
 
 const pricingItems = [
@@ -89,7 +83,7 @@ const Page = async () => {
             }
           </p>
         </div>
-        <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="pt-12 grid grid-cols-1 lg:grid-cols-2 gap-10 pl-8 sm:pl-0">
           <TooltipProvider>
             {pricingItems.map(({ plan, tagline, quota, features }) => {
               const price =
